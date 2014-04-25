@@ -19,6 +19,8 @@ public class Room
     public Room southExit;
     public Room eastExit;
     public Room westExit;
+    //nueva salida para ej 0110
+    public Room suresteExit; 
 
     /**
      * Create a room described "description". Initially, it has
@@ -39,7 +41,8 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    //añadido un parametro en la cabecera para 0110
+    public void setExits(Room north, Room east, Room south, Room west, Room sureste) 
     {
         if(north != null)
             northExit = north;
@@ -49,6 +52,10 @@ public class Room
             southExit = south;
         if(west != null)
             westExit = west;
+
+        //if añadido para 0110    
+        if(sureste != null)
+            suresteExit = sureste;    
     }
 
     /**

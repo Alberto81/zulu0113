@@ -44,14 +44,14 @@ public class Game
         descansillo = new Room("un espacio amplio al sur del centro comercial");
         servicios = new Room("los WC del centro comercial");
         salida = new Room("encontraste la salida del centro comercial!");
-        // initialise room exits
-        plaza.setExits(zapateria, peluqueria, descansillo, tiendaRopa);
-        zapateria.setExits(null, null, plaza, null);
-        tiendaRopa.setExits(null, plaza, null, null);
-        peluqueria.setExits(null, null, null, plaza);
-        descansillo.setExits(plaza, servicios, salida, null);
-        servicios.setExits(null, null, null, descansillo);
-        salida.setExits(descansillo, null, null, null);
+        // initialise room exits***modificado para la 0110
+        plaza.setExits(zapateria, peluqueria, descansillo, tiendaRopa, null);
+        zapateria.setExits(null, null, plaza, null, peluqueria);
+        tiendaRopa.setExits(null, plaza, null, null, null);
+        peluqueria.setExits(null, null, null, plaza, null);
+        descansillo.setExits(plaza, servicios, salida, null, null);
+        servicios.setExits(null, null, null, descansillo, null);
+        salida.setExits(descansillo, null, null, null, null);
 
         currentRoom = plaza;  // start game outside
     }
@@ -160,12 +160,17 @@ public class Game
             nextRoom = currentRoom.westExit;
         }
 
+        //modificado para 0110, en castellano para diferenciarlo mejor
+        if(direction.equals("sureste")) {
+            nextRoom = currentRoom.suresteExit;
+        }
+
+        
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
             currentRoom = nextRoom;
-
             printLocationInfo();//codigo remplazado por metodo
         }
     }
@@ -187,6 +192,12 @@ public class Game
         if(currentRoom.westExit != null) {
             System.out.print("west ");
         }
+        
+        //añadido para 0110
+        if(currentRoom.suresteExit != null) {
+            System.out.print("sureste ");
+        }
+        
         System.out.println();
     }
 
