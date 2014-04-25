@@ -156,28 +156,10 @@ public class Game
     }
 
     // ejercicio 0108, cambiar codigo repetido por petodo privado
-    private void printLocationInfo()
+    private void printLocationInfo()//0111 adapto este metodo para que invoque getExitString y se adapte a los atributos privados de Room
     {
         System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("west ");
-        }
-        
-        //añadido para 0110
-        if(currentRoom.suresteExit != null) {
-            System.out.print("sureste ");
-        }
-        
+        System.out.print(currentRoom.getExitString());
         System.out.println();
     }
 

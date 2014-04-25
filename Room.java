@@ -33,7 +33,7 @@ public class Room
         this.description = description;
     }
     
-    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación actual
+    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación
     {
         String exits="Exits: ";
          if (northExit != null){
