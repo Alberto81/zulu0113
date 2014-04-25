@@ -33,6 +33,27 @@ public class Room
         this.description = description;
     }
     
+    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación actual
+    {
+        String exits="Exits: ";
+         if (northExit != null){
+           exits = exits+" north";
+         }
+          if (southExit != null){
+           exits = exits+" south";
+         }
+          if (eastExit != null){
+           exits = exits+" east";
+         }
+          if (westExit != null){
+           exits = exits+" west";
+         }
+          if (suresteExit != null){
+           exits = exits+" sureste";
+         }
+        return exits; 
+    }
+    
     public Room getExit(String direction )//ej 0111, para acceder a los atributos room que pusimos como private.
     {         //le pasamos un String y devuelve el objeto Room asociado.
        Room rumbo = null;
