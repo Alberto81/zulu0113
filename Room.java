@@ -13,14 +13,14 @@
  * @version 2011.07.31
  */
 public class Room 
-{
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+{  //ejercicio0111 para que los atributos de room sean privados
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
     //nueva salida para ej 0110
-    public Room suresteExit; 
+    private Room suresteExit; 
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,7 +32,27 @@ public class Room
     {
         this.description = description;
     }
-
+    
+    public Room getExit(String direction )//ej 0111, para acceder a los atributos room que pusimos como private.
+    {         //le pasamos un String y devuelve el objeto Room asociado.
+       Room rumbo = null;
+        if(direction.equals("north")) {
+            rumbo = northExit;
+        }else if(direction.equals("south")) {
+            rumbo = southExit;
+        }else if(direction.equals("est")) {
+            rumbo = eastExit;
+        }else if(direction.equals("west")) {
+            rumbo = westExit;
+        }else if(direction.equals("sureste")) {
+            rumbo = suresteExit;
+        }//else if (direction == null) {
+         //    rumbo = null;
+        //} ***este if lo saltamos pq por defecto rumbo ya contiene null
+        return rumbo;
+    }
+    
+   
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
