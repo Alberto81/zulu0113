@@ -142,29 +142,9 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
-        }
-
-        //modificado para 0110, en castellano para diferenciarlo mejor
-        if(direction.equals("sureste")) {
-            nextRoom = currentRoom.suresteExit;
-        }
-
+         //0111-3 no se como condensar el metodo en una sola linea, a no ser que lo fraccione en tres metodos
+        Room nextRoom = currentRoom.getExit(command.getSecondWord());
+   
         
         if (nextRoom == null) {
             System.out.println("There is no door!");
