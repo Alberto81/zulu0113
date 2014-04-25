@@ -61,7 +61,7 @@ public class Room
             rumbo = northExit;
         }else if(direction.equals("south")) {
             rumbo = southExit;
-        }else if(direction.equals("est")) {
+        }else if(direction.equals("east")) {
             rumbo = eastExit;
         }else if(direction.equals("west")) {
             rumbo = westExit;
