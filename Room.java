@@ -1,3 +1,4 @@
+import java.util.HashMap;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -14,14 +15,10 @@
  */
 public class Room 
 {  //ejercicio0111 para que los atributos de room sean privados
+      private HashMap<String, Room> direccion;
+    
     private String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
-    //nueva salida para ej 0110
-    private Room suresteExit;
-    private Room noroesteExit;
+
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,51 +29,46 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        
+        direccion = new HashMap<String, Room>();//creamos el hashmap y lo llenamos(ej0112)
+
     }
 
-    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación
+    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación-0112-adaptado a un hashmap
     {
         String exits="Exits: ";
-        if (northExit != null){
+        if(direccion.get("north") != null){
+        
+        }
+        
+        if (direccion.get("north") != null){
             exits = exits+" north";
         }
-        if (southExit != null){
+        if (direccion.get("south") != null){
             exits = exits+" south";
         }
-        if (eastExit != null){
+        if (direccion.get("east") != null){
             exits = exits+" east";
         }
-        if (westExit != null){
+        if (direccion.get("west") != null){
             exits = exits+" west";
         }
-        if (suresteExit != null){
+        if (direccion.get("sureste") != null){
             exits = exits+" sureste";
         }
-        if (noroesteExit != null){
+        if (direccion.get("noroeste") != null){
             exits = exits+" noroeste";
         }
         return exits; 
     }
 
-    public Room getExit(String direction )//ej 0111, para acceder a los atributos room que pusimos como private.
-    {         //le pasamos un String y devuelve el objeto Room asociado.
-        Room rumbo = null;
-        if(direction.equals("north")) {
-            rumbo = northExit;
-        }else if(direction.equals("south")) {
-            rumbo = southExit;
-        }else if(direction.equals("east")) {
-            rumbo = eastExit;
-        }else if(direction.equals("west")) {
-            rumbo = westExit;
-        }else if(direction.equals("sureste")) {
-            rumbo = suresteExit;
-        }else if(direction.equals("noroeste")) {
-            rumbo = noroesteExit;
-        }
-        //else if (direction == null) {
-        //    rumbo = null;
-        //} ***este if lo saltamos pq por defecto rumbo ya contiene null
+    public Room getExit(String direction )
+    {        
+        
+        //funcionando con hashmap(ej 0112)
+        Room rumbo = direccion.get(direction);
+        
+       
         return rumbo;
     }
 
@@ -92,19 +84,17 @@ public class Room
     public void setExits(Room north, Room east, Room south, Room west, Room sureste, Room noroeste) 
     {
         if(north != null)
-            northExit = north;
+            direccion.put("north",north) ;
         if(east != null)
-            eastExit = east;
+           direccion.put("east", east) ;
         if(south != null)
-            southExit = south;
+             direccion.put("south", south) ;
         if(west != null)
-            westExit = west;
-
-        //if añadido para 0110    
+            direccion.put("west", west) ;
         if(sureste != null)
-            suresteExit = sureste;    
+             direccion.put("sureste", sureste);    
         if(noroeste != null)
-            noroesteExit = noroeste;   
+             direccion.put("noroeste", noroeste) ;   
     }
 
     /**
