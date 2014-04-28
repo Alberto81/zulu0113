@@ -45,13 +45,13 @@ public class Game
         servicios = new Room("los WC del centro comercial");
         salida = new Room("encontraste la salida del centro comercial!");
         // initialise room exits***modificado para la 0110
-        plaza.setExits(zapateria, peluqueria, descansillo, tiendaRopa, null);
-        zapateria.setExits(null, null, plaza, null, peluqueria);
-        tiendaRopa.setExits(null, plaza, null, null, null);
-        peluqueria.setExits(null, null, null, plaza, null);
-        descansillo.setExits(plaza, servicios, salida, null, null);
-        servicios.setExits(null, null, null, descansillo, null);
-        salida.setExits(descansillo, null, null, null, null);
+        plaza.setExits(zapateria, peluqueria, descansillo, tiendaRopa, null, null);
+        zapateria.setExits(null, null, plaza, null, peluqueria, null);
+        tiendaRopa.setExits(null, plaza, null, null, null, null);
+        peluqueria.setExits(null, null, null, plaza, null, zapateria);
+        descansillo.setExits(plaza, servicios, salida, null, null, null);
+        servicios.setExits(null, null, null, descansillo, null, null);
+        salida.setExits(descansillo, null, null, null, null, null);
 
         currentRoom = plaza;  // start game outside
     }
@@ -142,10 +142,9 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-         //0111-3 no se como condensar el metodo en una sola linea, a no ser que lo fraccione en tres metodos
+        //0111-3 no se como condensar el metodo en una sola linea, a no ser que lo fraccione en tres metodos
         Room nextRoom = currentRoom.getExit(command.getSecondWord());
-   
-        
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }

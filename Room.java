@@ -20,7 +20,8 @@ public class Room
     private Room eastExit;
     private Room westExit;
     //nueva salida para ej 0110
-    private Room suresteExit; 
+    private Room suresteExit;
+    private Room noroesteExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,31 +33,34 @@ public class Room
     {
         this.description = description;
     }
-    
+
     public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación
     {
         String exits="Exits: ";
-         if (northExit != null){
-           exits = exits+" north";
-         }
-          if (southExit != null){
-           exits = exits+" south";
-         }
-          if (eastExit != null){
-           exits = exits+" east";
-         }
-          if (westExit != null){
-           exits = exits+" west";
-         }
-          if (suresteExit != null){
-           exits = exits+" sureste";
-         }
+        if (northExit != null){
+            exits = exits+" north";
+        }
+        if (southExit != null){
+            exits = exits+" south";
+        }
+        if (eastExit != null){
+            exits = exits+" east";
+        }
+        if (westExit != null){
+            exits = exits+" west";
+        }
+        if (suresteExit != null){
+            exits = exits+" sureste";
+        }
+        if (noroesteExit != null){
+            exits = exits+" noroeste";
+        }
         return exits; 
     }
-    
+
     public Room getExit(String direction )//ej 0111, para acceder a los atributos room que pusimos como private.
     {         //le pasamos un String y devuelve el objeto Room asociado.
-       Room rumbo = null;
+        Room rumbo = null;
         if(direction.equals("north")) {
             rumbo = northExit;
         }else if(direction.equals("south")) {
@@ -67,13 +71,15 @@ public class Room
             rumbo = westExit;
         }else if(direction.equals("sureste")) {
             rumbo = suresteExit;
-        }//else if (direction == null) {
-         //    rumbo = null;
+        }else if(direction.equals("noroeste")) {
+            rumbo = noroesteExit;
+        }
+        //else if (direction == null) {
+        //    rumbo = null;
         //} ***este if lo saltamos pq por defecto rumbo ya contiene null
         return rumbo;
     }
-    
-   
+
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
@@ -83,7 +89,7 @@ public class Room
      * @param west The west exit.
      */
     //añadido un parametro en la cabecera para 0110
-    public void setExits(Room north, Room east, Room south, Room west, Room sureste) 
+    public void setExits(Room north, Room east, Room south, Room west, Room sureste, Room noroeste) 
     {
         if(north != null)
             northExit = north;
@@ -97,6 +103,8 @@ public class Room
         //if añadido para 0110    
         if(sureste != null)
             suresteExit = sureste;    
+        if(noroeste != null)
+            noroesteExit = noroeste;   
     }
 
     /**
