@@ -17,6 +17,7 @@
 
 public class Game 
 {
+    private Room plaza, zapateria, tiendaRopa, peluqueria, descansillo, servicios, salida;//para poder acceder a las habitaciones
     private Parser parser;
     private Room currentRoom;
 
@@ -34,7 +35,6 @@ public class Game
      */
     private void createRooms()
     {
-        Room plaza, zapateria, tiendaRopa, peluqueria, descansillo, servicios, salida;
 
         // create the rooms
         plaza = new Room("una amplia plaza redonda en el medio del centro comercial");
@@ -142,14 +142,50 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-        //0111-3 no se como condensar el metodo en una sola linea, a no ser que lo fraccione en tres metodos
+        //0113 si hay una 3º palabra es que intentamos abrir una nueva puerta, falla si ya existe una room asociada a esa direccion 
+        Room destino = null;//aqui almacenaremos la room definida por la string
         Room nextRoom = currentRoom.getExit(command.getSecondWord());
+        if(command.hasTerceraPalabra()) { //si existe un tercer comando referido a la habitacion de destino
+            if(currentRoom.getExit(command.getSecondWord()) == null){//si no hay ninguna habitacion en la salida escogida
+                String portalA =  command.getTerceraPalabra();
+                System.out.println("***"+portalA+"***");
+                if (portalA.equals("plaza")){
+                    destino=plaza ;
+                }else if(portalA.equals("zapateria")){
+                    destino=zapateria;
+                }else if(portalA.equals("tiendaRopa")){
+                    destino=tiendaRopa;
+                }else if(portalA.equals("peluqueria")){
+                    destino= peluqueria;
+                }else if(portalA.equals("descansillo")){
+                    destino=descansillo;
+                }else if(portalA.equals("servicios")){
+                    destino=servicios;
+                }else if(portalA.equals("salida")){
+                    destino=salida;
+                }else{
+                    System.out.println("esa habitacion no existe");//si la habitacion no existe, destino valdra null.
+                }
+
+                currentRoom.setExit(command.getSecondWord(), destino); //creo la salida, el caso en que destino sea null lo resolveré en setExit.
+                System.out.println("abierto portal unidireccional a "+portalA+"con exito");
+
+            }else{//si ya existe una salida en esa dirección, nos saltamos todo esto y cambiamos de habitacion sin añadir ninguna salida.
+                System.out.println("Ya existe una salida en esa direccion");
+            }
+
+        }
+        //hayamos creado una salida o no, pasamos a la siguiente habitacion.
+        if(destino != null){//asignamos siguiente habitacion a una salida normal en caso de que no se cree ninguna salida por portal
+            nextRoom = destino;
+            System.out.println("esto va?"); 
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
+            currentRoom = nextRoom;//cambio de habitacion
             printLocationInfo();//codigo remplazado por metodo
         }
     }

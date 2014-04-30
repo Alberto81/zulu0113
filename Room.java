@@ -15,10 +15,9 @@ import java.util.HashMap;
  */
 public class Room 
 {  //ejercicio0111 para que los atributos de room sean privados
-      private HashMap<String, Room> direccion;
-    
-    private String description;
+    private HashMap<String, Room> direccion;
 
+    private String description;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,7 +28,7 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
-        
+
         direccion = new HashMap<String, Room>();//creamos el hashmap y lo llenamos(ej0112)
 
     }
@@ -38,9 +37,9 @@ public class Room
     {
         String exits="Exits: ";
         if(direccion.get("north") != null){
-        
+
         }
-        
+
         if (direccion.get("north") != null){
             exits = exits+" north";
         }
@@ -64,11 +63,10 @@ public class Room
 
     public Room getExit(String direction )
     {        
-        
+
         //funcionando con hashmap(ej 0112)
         Room rumbo = direccion.get(direction);
-        
-       
+
         return rumbo;
     }
 
@@ -86,16 +84,26 @@ public class Room
         if(north != null)
             direccion.put("north",north) ;
         if(east != null)
-           direccion.put("east", east) ;
+            direccion.put("east", east) ;
         if(south != null)
-             direccion.put("south", south) ;
+            direccion.put("south", south) ;
         if(west != null)
             direccion.put("west", west) ;
         if(sureste != null)
-             direccion.put("sureste", sureste);    
+            direccion.put("sureste", sureste);    
         if(noroeste != null)
-             direccion.put("noroeste", noroeste) ;   
+            direccion.put("noroeste", noroeste) ;   
     }
+
+    //del ejercicio 13
+    public void setExit(String direction, Room neighbor)
+    {
+        if(neighbor!= null){
+            direccion.put(direction, neighbor);
+        }
+    }
+
+    // create the rooms
 
     /**
      * @return The description of the room.

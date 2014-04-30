@@ -21,18 +21,20 @@ public class Command
 {
     private String commandWord;
     private String secondWord;
+    private String terceraPalabra;
 
     /**
      * Create a command object. First and second word must be supplied, but
      * either one (or both) can be null.
      * @param firstWord The first word of the command. Null if the command
      *                  was not recognised.
-     * @param secondWord The second word of the command.
+     * @param secondWord The second word of the command.113
      */
-    public Command(String firstWord, String secondWord)
+    public Command(String firstWord, String secondWord, String terceraPalabra)
     {
         commandWord = firstWord;
         this.secondWord = secondWord;
+        this.terceraPalabra = terceraPalabra;
     }
 
     /**
@@ -45,6 +47,14 @@ public class Command
         return commandWord;
     }
 
+    /**
+     * @devuelve la tercera palabra.113
+     */
+    public String getTerceraPalabra()
+    {
+        return terceraPalabra;
+    }
+    
     /**
      * @return The second word of this command. Returns null if there was no
      * second word.
@@ -68,6 +78,14 @@ public class Command
     public boolean hasSecondWord()
     {
         return (secondWord != null);
+    }
+    //pa 113
+    /**
+     * @return true if the command has a second word.
+     */
+    public boolean hasTerceraPalabra()
+    {
+        return (terceraPalabra != null);
     }
 }
 
