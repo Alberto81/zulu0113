@@ -36,9 +36,6 @@ public class Room
     public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación-0112-adaptado a un hashmap
     {
         String exits="Exits: ";
-        if(direccion.get("north") != null){
-
-        }
 
         if (direccion.get("north") != null){
             exits = exits+" north";

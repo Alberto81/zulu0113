@@ -110,6 +110,9 @@ public class Game
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
+        } 
+        else if (commandWord.equals("portal")) {
+            abrePortal(command);
         }
 
         return wantToQuit;
@@ -142,44 +145,8 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-        //0113 si hay una 3º palabra es que intentamos abrir una nueva puerta, falla si ya existe una room asociada a esa direccion 
-        Room destino = null;//aqui almacenaremos la room definida por la string
+
         Room nextRoom = currentRoom.getExit(command.getSecondWord());
-        if(command.hasTerceraPalabra()) { //si existe un tercer comando referido a la habitacion de destino
-            if(currentRoom.getExit(command.getSecondWord()) == null){//si no hay ninguna habitacion en la salida escogida
-                String portalA =  command.getTerceraPalabra();
-                System.out.println("***"+portalA+"***");
-                if (portalA.equals("plaza")){
-                    destino=plaza ;
-                }else if(portalA.equals("zapateria")){
-                    destino=zapateria;
-                }else if(portalA.equals("tiendaRopa")){
-                    destino=tiendaRopa;
-                }else if(portalA.equals("peluqueria")){
-                    destino= peluqueria;
-                }else if(portalA.equals("descansillo")){
-                    destino=descansillo;
-                }else if(portalA.equals("servicios")){
-                    destino=servicios;
-                }else if(portalA.equals("salida")){
-                    destino=salida;
-                }else{
-                    System.out.println("esa habitacion no existe");//si la habitacion no existe, destino valdra null.
-                }
-
-                currentRoom.setExit(command.getSecondWord(), destino); //creo la salida, el caso en que destino sea null lo resolveré en setExit.
-                System.out.println("abierto portal unidireccional a "+portalA+"con exito");
-
-            }else{//si ya existe una salida en esa dirección, nos saltamos todo esto y cambiamos de habitacion sin añadir ninguna salida.
-                System.out.println("Ya existe una salida en esa direccion");
-            }
-
-        }
-        //hayamos creado una salida o no, pasamos a la siguiente habitacion.
-        if(destino != null){//asignamos siguiente habitacion a una salida normal en caso de que no se cree ninguna salida por portal
-            nextRoom = destino;
-            System.out.println("esto va?"); 
-        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -190,12 +157,69 @@ public class Game
         }
     }
 
+    //0113 escoge room
+    private Room selectRoom(Command command)
+    {
+
+        Room destino = null;
+        String portalA =  command.getTerceraPalabra();
+        if (portalA.equals("plaza")){
+            destino=plaza ;
+        }else if(portalA.equals("zapateria")){
+            destino=zapateria;
+        }else if(portalA.equals("tiendaRopa")){
+            destino=tiendaRopa;
+        }else if(portalA.equals("peluqueria")){
+            destino= peluqueria;
+        }else if(portalA.equals("descansillo")){
+            destino=descansillo;
+        }else if(portalA.equals("servicios")){
+            destino=servicios;
+        }else if(portalA.equals("salida")){
+            destino=salida;
+        }else{
+            System.out.println("esa habitacion no existe");//si la habitacion no existe, destino valdra null.
+        }
+
+        return destino;
+
+    }
+    private boolean dirValida(Command command)
+    {
+        String dir = command.getSecondWord();
+        boolean valid = false;
+        if (dir.equals("north")||dir.equals("south")||dir.equals("east")||dir.equals("west")||dir.equals("sureste")||dir.equals("noroeste")){
+            valid = true;
+
+        }
+        return valid;
+    }
+
+    private void abrePortal(Command command)
+    {
+        Room destino = currentRoom.getExit(command.getSecondWord());
+        String rumbo = command.getSecondWord();
+        if (destino== null){//si no hay ninguna habitacion en la salida escogida le asignaremos una
+
+            if(dirValida(command)){//comprueva que la direccion es valida
+                currentRoom.setExit(rumbo, selectRoom(command));//creo la nueva salida
+            }
+            else{
+                System.out.println("direccion no valida");
+            }
+            
+        }else{
+            System.out.println("ya existe una salida en esa direccion");
+        }
+        
+        printLocationInfo();//para clarificar.
+    }
     // ejercicio 0108, cambiar codigo repetido por petodo privado
     private void printLocationInfo()//0111 adapto este metodo para que invoque getExitString y se adapte a los atributos privados de Room
     {
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print(currentRoom.getExitString());
-        System.out.println();
+        System.out.println(); 
     }
 
     /** 

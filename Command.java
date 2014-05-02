@@ -54,7 +54,7 @@ public class Command
     {
         return terceraPalabra;
     }
-    
+
     /**
      * @return The second word of this command. Returns null if there was no
      * second word.
