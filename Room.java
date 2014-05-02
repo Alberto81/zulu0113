@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Set;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -33,30 +34,55 @@ public class Room
 
     }
 
-    public String getExitString()//ej 0111- metodo que devuelve una String con las salidas de la habitación-0112-adaptado a un hashmap
-    {
-        String exits="Exits: ";
+    
+     //private Room selectRoom(Room rom)
+    //{
+     //  String room =  null;
+        
+      //  if (rom==plaza("plaza")){
+       //     room = ;
+        //}else if(rom==zapateria){
+        //    room = "zapateria";
+        //}else if(rom==tiendaRopa("tiendaRopa")){
+        //    room =;
+        //}else if(rom== peluqueria("peluqueria")){
+        //    room =;
+        //}else if(rom ==descansillo("descansillo")){
+         //   room =;
+        //}else if(rom==servicios("servicios")){
+        //    room =;
+        //}else if( rom==salida;("salida")){
+           
+       
 
-        if (direccion.get("north") != null){
-            exits = exits+" north";
-        }
-        if (direccion.get("south") != null){
-            exits = exits+" south";
-        }
-        if (direccion.get("east") != null){
-            exits = exits+" east";
-        }
-        if (direccion.get("west") != null){
-            exits = exits+" west";
-        }
-        if (direccion.get("sureste") != null){
-            exits = exits+" sureste";
-        }
-        if (direccion.get("noroeste") != null){
-            exits = exits+" noroeste";
-        }
-        return exits; 
+       // return destino;
+
+    //}
+    
+    public String getLongDescription()
+    {
+        String go="";
+        Room habitacion= new Room("hola");
+        System.out.println(habitacion);
+         return go;
+         
+         
+         
+         
     }
+    
+    public String getExitString()
+    {
+        String conjuntoSalidas="salidas por; ";
+         Set <String> salidas = direccion.keySet();
+         for(String dir:salidas){
+            conjuntoSalidas = conjuntoSalidas + dir+" ";
+            }
+            
+       return conjuntoSalidas;
+    }
+    
+   
 
     public Room getExit(String direction )
     {        
